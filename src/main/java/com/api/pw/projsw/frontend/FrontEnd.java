@@ -7,6 +7,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.Column;
 import java.io.Serializable;
 
@@ -43,6 +47,10 @@ public class FrontEnd implements Serializable {
     return this.secret;
   }
 
+  public void setSecret (String secret) {
+    this.secret = secret;
+  }
+
   @Override
   public boolean equals (Object auxObj) {
     if (!(auxObj instanceof FrontEnd)) {
@@ -50,7 +58,8 @@ public class FrontEnd implements Serializable {
     }
 
     FrontEnd auxFrontEnd = (FrontEnd) auxObj;
-
-    return this.id.equals(auxFrontEnd.getId()) && this.secret.equals(auxFrontEnd.getSecret());
+    
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    return this.id.equals(auxFrontEnd.getId()) && passwordEncoder.matches(auxFrontEnd.getSecret(), this.secret);
   }
 }

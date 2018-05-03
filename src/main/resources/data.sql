@@ -1,0 +1,1 @@
+INSERT INTO frontend VALUES ('admin', '$2a$10$LHcA2Yysy6hARcWGDZ0LjOSdmToouLR5VEqt2iSru5JbVHPD09hFi');
