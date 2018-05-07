@@ -2,6 +2,7 @@ package com.api.pw.projsw.msg;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.api.pw.projsw.frontend.FrontEnd;
@@ -37,7 +38,7 @@ public class Message implements Serializable {
   @CreationTimestamp
   private LocalDateTime created_at;
 
-  @Column(nullable = false)
+  @ManyToOne
   private FrontEnd credentials;
 
   protected Message () {
@@ -48,7 +49,7 @@ public class Message implements Serializable {
     this.msg = msg;
     this.author = author;
     this.created_at = created_at;
-    this.credentials = credentials ;
+    this.credentials = credentials;
   }
 
   public String getTitle () {

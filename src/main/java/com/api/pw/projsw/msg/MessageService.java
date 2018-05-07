@@ -13,7 +13,6 @@ import com.api.pw.projsw.frontend.FrontEndService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -25,9 +24,6 @@ public class MessageService {
 
   @Autowired
   private FrontEndService frontEndService;
-
-  @Autowired
-  private PasswordEncoder passwordEncoder;
 
   private Map<String, String> response = new HashMap<String, String>();
 
@@ -87,8 +83,7 @@ public class MessageService {
 
     Message message = optMessage.get();
     
-    credentials.setSecret(passwordEncoder.encode(credentials.getSecret()));
-
+    System.out.println(credentials.getSecret());
     if (!message.getCredentials().equals(credentials)) {
       throw new InvalidCredentialsException("Credenciais invalidas");
     }

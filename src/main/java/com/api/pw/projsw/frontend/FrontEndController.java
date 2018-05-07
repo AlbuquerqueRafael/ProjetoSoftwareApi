@@ -9,12 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/api")
 public class FrontEndController {
 	
@@ -27,9 +28,7 @@ public class FrontEndController {
   }
 
   @RequestMapping(value = "/frontend", method = RequestMethod.POST)
-  public ResponseEntity<Map<String, String>> save (@RequestBody FrontEnd frontend,
-                                                   @ModelAttribute FrontEnd admin) {
-    frontEndService.checkAdmin(admin);
+  public ResponseEntity<Map<String, String>> save (@RequestBody FrontEnd frontend) {
     Map<String, String> response = frontEndService.save(frontend);
 
 		return new ResponseEntity<Map<String, String>>(response, HttpStatus.CREATED);

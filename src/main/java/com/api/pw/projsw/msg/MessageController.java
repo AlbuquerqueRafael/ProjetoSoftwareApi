@@ -11,12 +11,14 @@ import com.api.pw.projsw.frontend.FrontEnd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/api")
 public class MessageController {
 	

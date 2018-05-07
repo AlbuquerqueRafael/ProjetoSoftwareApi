@@ -28,9 +28,15 @@ public class FrontEndService {
   }
 
   public FrontEnd getFrontEnd (FrontEnd frontEnd) {
-    Optional<FrontEnd> optFrontEnd = frontEndRepository.findByIdAndSecret(frontEnd.getId(), frontEnd.getSecret());
+    Optional<FrontEnd> optFrontEnd = frontEndRepository.findById(frontEnd.getId());
 
     if (!optFrontEnd.isPresent()) {
+      throw new InvalidCredentialsException("Credenciais invalidas");
+    }
+
+    FrontEnd dbFrontEnd = optFrontEnd.get();
+
+    if (!dbFrontEnd.equals(frontEnd)) {
       throw new InvalidCredentialsException("Credenciais invalidas");
     }
 
@@ -40,6 +46,7 @@ public class FrontEndService {
   public Map<String, String> save (FrontEnd frontend){
     checkInvalidParams(frontend);
 
+    frontend.setSecret(passwordEnconder.encode(frontend.getSecret()));
     frontEndRepository.save(frontend);
     response.put("response", "Frontend foi persistido com sucesso");
     return response;

@@ -7,7 +7,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -58,8 +57,9 @@ public class FrontEnd implements Serializable {
     }
 
     FrontEnd auxFrontEnd = (FrontEnd) auxObj;
-    
+
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     return this.id.equals(auxFrontEnd.getId()) && passwordEncoder.matches(auxFrontEnd.getSecret(), this.secret);
   }
 }

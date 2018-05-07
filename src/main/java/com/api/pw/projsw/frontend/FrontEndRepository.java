@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public interface FrontEndRepository extends JpaRepository<FrontEnd, Long> {
   
-  Optional<FrontEnd> findByIdAndSecret(String id, String secret);
+  Optional<FrontEnd> findById(String id);
 }
